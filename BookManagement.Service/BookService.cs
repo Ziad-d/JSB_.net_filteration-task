@@ -41,11 +41,11 @@ namespace BookManagement.Service
 
         public async Task DeleteBookAsync(int id)
         {
-            var book = _repository.GetByIdAsync(id);
+            var book = await _repository.GetByIdAsync(id);
 
             if(book != null)
             {
-                _repository.DeleteAsync(await book);
+                _repository.DeleteAsync(book);
             }
 
             await _dbContext.SaveChangesAsync();
