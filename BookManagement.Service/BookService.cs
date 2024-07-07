@@ -21,6 +21,7 @@ namespace BookManagement.Service
             _repository = repository;
             _dbContext = dbContext;
         }
+
         public async Task<IReadOnlyList<Book>> GetBooksAsync()
             => await _repository.GetAllAsync();
 
