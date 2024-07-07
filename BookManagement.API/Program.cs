@@ -1,4 +1,6 @@
+using BookManagement.Domain.Services;
 using BookManagement.Repository.Data;
+using BookManagement.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped(typeof(IBookService), typeof(BookService));
+builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
 
 var app = builder.Build();
 
