@@ -11,40 +11,40 @@ using System.Threading.Tasks;
 
 namespace BookManagement.Service
 {
-    public class BookService : IBookService
+    public class CategoryService : ICategoryService
     {
-        private readonly IGenericRepository<Book> _repository;
+        private readonly IGenericRepository<Category> _repository;
         private readonly ApplicationDbContext _dbContext;
 
-        public BookService(IGenericRepository<Book> repository, ApplicationDbContext dbContext)
+        public CategoryService(IGenericRepository<Category> repository, ApplicationDbContext dbContext)
         {
             _repository = repository;
             _dbContext = dbContext;
         }
-        public async Task<IReadOnlyList<Book>> GetBooksAsync()
+        public async Task<IReadOnlyList<Category>> GetCategoriesAsync()
             => await _repository.GetAllAsync();
 
-        public async Task<Book?> GetBookAsync(int id)
+        public async Task<Category?> GetCategoryAsync(int id)
             => await _repository.GetByIdAsync(id);
 
-        public async Task AddBookAsync(Book book)
+        public async Task AddCategoryAsync(Category category)
         {
-            await _repository.AddAsync(book);
+            await _repository.AddAsync(category);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateBookAsync(Book book)
+        public async Task UpdateCategoryAsync(Category category)
         {
-            _repository.UpdateAsync(book);
+            _repository.UpdateAsync(category);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteBookAsync(int id)
+        public async Task DeleteCategoryAsync(int id)
         {
-            var book = await _repository.GetByIdAsync(id);
+            var category = await _repository.GetByIdAsync(id);
 
-            if(book != null)
-                _repository.DeleteAsync(book);
+            if(category != null)
+                _repository.DeleteAsync(category);
 
             await _dbContext.SaveChangesAsync();
         }
